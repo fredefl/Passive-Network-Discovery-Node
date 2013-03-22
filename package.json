@@ -1,0 +1,11 @@
+{
+  "name": "Passive-Network-Discovery-Node",
+  "description": "",
+  "author": "Frederik Fredslund Lassen <frederiklassen@gmail.com>",
+  "version": "0.0.1",
+  "dependencies": {
+    "commander": "*",
+    "mysql": "*",
+    "pcap": "*"
+  }
+}
