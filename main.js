@@ -39,8 +39,7 @@ console.log("- Connecting to MySQL database...");
 mysqlConnection.connect();
 console.log("- Connected to MySQL database!");
 
-//capture = pcap.createSession(program.interface, 'ether proto not 0x888e and ether proto not 0x88b7 and ether proto not 0xcccc');
-capture = pcap.createSession(program.interface, 'port 137');
+capture = pcap.createSession(program.interface, 'ether proto not 0x888e and ether proto not 0x88b7 and ether proto not 0xcccc');
 
 if (program.clean) {
 	console.log("- Cleaning...");
@@ -97,7 +96,7 @@ capture.on('packet', function (raw_packet) {
 	}
 
 	try {
-		if (typeof packet.link.ip.udp != 'undefined' && packet.link.ip.udp.dport == 137 && packet.link.ip.udp.length == 76) {
+		if (typeof packet.link.ip != 'undefined' && typeof packet.link.ip.udp != 'undefined' && packet.link.ip.udp.dport == 137 && packet.link.ip.udp.length == 76) {
 			// From [13] to [12+32]
 			var netbiosName = "";
 			for (var i = 13; i <= 13 + 31; i += 2) {
@@ -116,7 +115,7 @@ capture.on('packet', function (raw_packet) {
 	processInformation(sourceMac, sourceIp, method);
 	processInformation(destinationMac, destinationIp, method);
 	if (netbiosName !== null) 
-		processNetbiosName((sourceMac, sourceIp, method, netbiosName);
+		processNetbiosName(sourceMac, sourceIp, netbiosName);
 });
 
 function processInformation (macAddress, ipAddress, method) {
@@ -133,9 +132,21 @@ function processInformation (macAddress, ipAddress, method) {
 					console.log(getTime() + "New host discovered: " + method + "\t" + macAddress + "\t" + ipAddress);
 				}
 			});
-			mysqlConnection.query('INSERT INTO ' + mysqlTable + ' (ip, mac, method) VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE ip=?, mac=?, method=?',
-				[ipAddress, macAddress, method, ipAddress, macAddress, method]);
+			try {
+				mysqlConnection.query('INSERT INTO ' + mysqlTable + ' (ip, mac, method) VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE ip=?, mac=?, method=?',
+					[ipAddress, macAddress, method, ipAddress, macAddress, method]);
+			} catch (ex) {
+
+			}
 		}
+	}
+}
+
+function processNetbiosName (macAddress, ipAddress, netbiosName) {
+	try {
+		mysqlConnection.query('UPDATE ' + mysqlTable + ' SET netbiosName=? WHERE ip=? AND mac=?',[netbiosName, ipAddress, macAddress]);
+	} catch (ex) {
+
 	}
 }
 
