@@ -6,7 +6,12 @@ Usage
 
 To capture packets from `eth0` with default MySQL settings:
     `sudo ./main.js -i eth0`
-I you wan't to change the connection parameters of the MySQL database or want to get more fancy, take a look at the command line options below.
+
+I you want to change the connection parameters of the MySQL database or want to get more fancy, take a look at the command line options below.
+
+Heads up!
+--------------------------------------
+**In most cases packet capture in *nix requires root privileges, so make sure to run the tool with `sudo` or as root!
 
 Command line options
 --------------------------------------
