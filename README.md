@@ -34,6 +34,21 @@ Command line options
     -d, --debug                           print packet data for unparsable packets
     -a, --all                             don't limit the host discovery to private subnets
 
+Database
+--------------
+To create the MySQL database, use:
+
+    delimiter $$
+
+    CREATE TABLE `hosts` (
+      `ip` varchar(45) NOT NULL DEFAULT '',
+      `mac` varchar(45) NOT NULL DEFAULT '',
+      `method` varchar(45) DEFAULT NULL,
+      `netbiosName` varchar(45) DEFAULT NULL,
+       PRIMARY KEY (`mac`,`ip`),
+       UNIQUE KEY `ip_UNIQUE` (`ip`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
 Dependencies
 --------------------------------------
 
