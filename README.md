@@ -12,7 +12,7 @@ or
     
     sudo node main.js -i eth0
 
-I you want to change the connection parameters of the MySQL database or want to get more fancy, take a look at the command line options below.
+If you want to change the connection parameters of the MySQL database or want to get more fancy, take a look at the command line options below.
 
 Heads up!
 --------------------------------------
