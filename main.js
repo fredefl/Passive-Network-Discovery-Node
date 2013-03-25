@@ -143,6 +143,7 @@ function processInformation (macAddress, ipAddress, method) {
 }
 
 function processNetbiosName (macAddress, ipAddress, netbiosName) {
+	// Insert the netbios name into the database
 	try {
 		mysqlConnection.query('UPDATE ' + mysqlTable + ' SET netbiosName=? WHERE ip=? AND mac=?',[netbiosName, ipAddress, macAddress]);
 	} catch (ex) {
