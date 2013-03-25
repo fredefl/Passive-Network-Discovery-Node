@@ -98,7 +98,6 @@ capture.on('packet', function (raw_packet) {
 	try {
 		if (typeof packet.link.ip != 'undefined' && typeof packet.link.ip.udp != 'undefined' && packet.link.ip.udp.dport == 137 && packet.link.ip.udp.length == 76) {
 			// From [13] to [12+32]
-			var netbiosName = "";
 			for (var i = 13; i <= 13 + 31; i += 2) {
 				var character = "";
 				var characterHex = packet.link.ip.udp.data[i].toString(16) + packet.link.ip.udp.data[i+1].toString(16);
@@ -114,7 +113,7 @@ capture.on('packet', function (raw_packet) {
 
 	processInformation(sourceMac, sourceIp, method);
 	processInformation(destinationMac, destinationIp, method);
-	if (netbiosName !== null) 
+	if (netbiosName !== null)
 		processNetbiosName(sourceMac, sourceIp, netbiosName);
 });
 
@@ -123,7 +122,7 @@ function processInformation (macAddress, ipAddress, method) {
 		if (program.all || ipAddress.match("(^10\.[0-9])|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^192\.168\.)|(^fe80)")) {
 			if (program.verbose || program.debug)
 				console.log(getTime() + "Host discovered (debug): " + method + "\t" + macAddress + "\t" + ipAddress);
-			mysqlConnection.query('SELECT count(*) FROM ' + mysqlTable + ' WHERE ip=? OR mac=?', [ipAddress, macAddress],
+			mysqlConnection.query('SELECT count(*) FROM ' + mysqlTable + ' WHERE ip=?', [ipAddress, macAddress],
 				function(err, rows, results) {
 				var rowCount = rows[0]['count(*)'];
 
