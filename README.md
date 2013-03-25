@@ -1,6 +1,12 @@
-Passive Network Discovery
+Passive Network Discovery - Node
 ==============================
-### Using Node.js
+
+Usage
+--------------------------------------
+
+To capture packets from `eth0` with default MySQL settings:
+    `sudo ./main.js -i eth0`
+I you wan't to change the connection parameters of the MySQL database or want to get more fancy, take a look at the command line options below.
 
 Command line options
 --------------------------------------
@@ -17,3 +23,28 @@ Command line options
     -v, --verbose                         print more information than usual
     -d, --debug                           print packet data for unparsable packets
     -a, --all                             don't limit the host discovery to private subnets
+
+Dependencies
+--------------------------------------
+
+ - **nodejs** No shit sherlock
+ - **node_pcap** Used to capture the all important packets with node
+ - **node_util** Used to inspect packets (debug)
+ - **node_mysql** Used to store discovered hosts
+ - **node_commander** Used to create the nice command line option interface
+ - **libpcap** Used to capture packets
+ 
+You will need to have a MySQL server running in order for it to work.
+You will also in most cases need root access.
+
+License
+-------------------------------------
+Copyright (C) 2013 Frederik Fredslund Lassen <frederiklassen@gmail.com>
+https://illution.dk
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
