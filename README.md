@@ -7,7 +7,7 @@ Usage
 To capture packets from `eth0` with default MySQL settings:
     `sudo ./main.js -i eth0`
     
-    or
+or
     
     `sudo node main.js -i eth0`
 
