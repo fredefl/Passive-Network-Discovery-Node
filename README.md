@@ -5,11 +5,12 @@ Usage
 --------------------------------------
 
 To capture packets from `eth0` with default MySQL settings:
-    `sudo ./main.js -i eth0`
+
+    sudo ./main.js -i eth0
     
 or
     
-    `sudo node main.js -i eth0`
+    sudo node main.js -i eth0
 
 I you want to change the connection parameters of the MySQL database or want to get more fancy, take a look at the command line options below.
 
