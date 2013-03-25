@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-console.log("Welcome to Passive Host Discovey");
+console.log("Welcome to Passive Network Discovey");
 
 var pcap = require('pcap'),
 	util = require('util'),
@@ -8,17 +8,17 @@ var pcap = require('pcap'),
 
 program
   .version('0.0.1')
-  .option('-i, --interface <interface>', 'The network interface to capture from')
-  .option('-dbh, --database_host <host>', 'The MySQL database host')
-  .option('-dbu, --database_user <username>', 'The MySQL database username')
-  .option('-dbp, --database_pass <password>', 'The MySQL database password')
-  .option('-dbport, --database_port <port>', 'The MySQL database port')
-  .option('-dbd, --database_database <database>', 'The MySQL database to use')
-  .option('-dbt, --database_table <table>', 'The MySQL database table')
-  .option('-c, --clean', 'Cleans all previous discoveries from the database before start')
-  .option('-v, --verbose', 'Will print more information that usual')
-  .option('-d, --debug', 'Will print packet data for unparsable packets')
-  .option('-a, --all', 'Doesn\'t limit the host discovery to private subnets')
+  .option('-i, --interface <interface>', 'network interface to capture from')
+  .option('-dbh, --database_host <host>', 'MySQL database host')
+  .option('-dbu, --database_user <username>', 'MySQL database username')
+  .option('-dbp, --database_pass <password>', 'MySQL database password')
+  .option('-dbport, --database_port <port>', 'MySQL database port')
+  .option('-dbd, --database_database <database>', 'MySQL database/schema')
+  .option('-dbt, --database_table <table>', 'MySQL database table')
+  .option('-c, --clean', 'clean start, clears the database')
+  .option('-v, --verbose', 'print more information than usual')
+  .option('-d, --debug', 'print packet data for unparsable packets')
+  .option('-a, --all', 'don\'t limit the host discovery to private subnets')
   .parse(process.argv);
 
 if (!program.interface) {
