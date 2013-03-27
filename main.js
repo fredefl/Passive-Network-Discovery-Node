@@ -62,7 +62,7 @@ capture.on('packet', function (raw_packet) {
 	var sourceIp = "0.0.0.0";
 	var destinationIp = "0.0.0.0";
 	var method = "none";
-	var netbiosName = null;
+	var netbiosName = "";
 	try {
 		if (typeof packet.link.arp != 'undefined') {
 			sourceMac = packet.link.arp.sender_ha;
@@ -103,9 +103,11 @@ capture.on('packet', function (raw_packet) {
 				var characterHex = packet.link.ip.udp.data[i].toString(16) + packet.link.ip.udp.data[i+1].toString(16);
 				if (characterHex in characterArray)
 					character = characterArray[characterHex];
-				netbiosName += character;
+				if (character !== null)
+					netbiosName += character;
 			}
 			netbiosName = netbiosName.replace(/^(\s*)((\S+\s*?)*)(\s*)$/,"$2");
+
 		}
 	} catch (ex) {
 		console.log("Error in Netbios parsing", ex);
@@ -113,7 +115,7 @@ capture.on('packet', function (raw_packet) {
 
 	processInformation(sourceMac, sourceIp, method);
 	processInformation(destinationMac, destinationIp, method);
-	if (netbiosName !== null)
+	if (netbiosName !== "")
 		processNetbiosName(sourceMac, sourceIp, netbiosName);
 });
 
