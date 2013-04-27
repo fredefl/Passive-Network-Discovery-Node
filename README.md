@@ -41,12 +41,12 @@ To create the MySQL database, use:
     delimiter $$
 
     CREATE TABLE `hosts` (
-      `ip` varchar(45) NOT NULL DEFAULT '',
-      `mac` varchar(17) NOT NULL DEFAULT '',
-      `method` varchar(10) DEFAULT NULL,
-      `netbiosName` varchar(16) DEFAULT NULL,
-       PRIMARY KEY (`mac`,`ip`),
-       UNIQUE KEY `ip_UNIQUE` (`ip`)
+    `ip` varchar(45) NOT NULL DEFAULT '',
+    `mac` varchar(45) NOT NULL DEFAULT '',
+    `method` varchar(45) DEFAULT NULL,
+    `netbiosName` varchar(45) DEFAULT NULL,
+    PRIMARY KEY (`mac`,`ip`),
+    UNIQUE KEY `ip_UNIQUE` (`ip`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 
 Dependencies
