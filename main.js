@@ -115,7 +115,14 @@ capture.on('packet', function (raw_packet) {
 
 	processInformation(sourceMac, sourceIp, method);
 	processInformation(destinationMac, destinationIp, method);
-	if (netbiosName !== "")
+
+	var ignoreNetbiosNames = [
+		"KTSINFO",
+		"WORKGROUP",
+		"__MSBROWSE__"
+	];
+
+	if (netbiosName !== "" && ignoreNetbiosNames.indexOf(netbiosName) < 0)
 		processNetbiosName(sourceMac, sourceIp, netbiosName);
 });
 
